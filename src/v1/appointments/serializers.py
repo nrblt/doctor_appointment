@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Appointment
 from drf_spectacular.utils import extend_schema_field
+from djoser.serializers import UserCreateSerializer
+from django.contrib.auth import get_user_model
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
@@ -34,3 +36,19 @@ class AppointmentListSerializer(serializers.ModelSerializer):
         available_time_slots = [
             choice[0] for choice in self.TIME_CHOICES if choice[0] not in taken_time_slots]
         return obj.time in available_time_slots
+
+
+user_model = get_user_model()
+
+
+class UserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = user_model
+        fields = (
+            'id',
+            'email',
+            'password',
+            'username',
+            'first_name',
+            'last_name',
+        )
