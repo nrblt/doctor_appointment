@@ -50,6 +50,7 @@ MIDDLEWARE = [
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'v1.appointments.serializers.UserCreateSerializer',
+        'current_user': 'v1.appointments.serializers.UserCreateSerializer',
     }
 }
 ROOT_URLCONF = 'config.urls'
